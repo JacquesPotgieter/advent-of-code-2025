@@ -4,29 +4,12 @@ import re
 from argparse import ArgumentParser
 import os.path
 
+from lock_position import LockPosition
 
-class LockPosition:
-    def __init__(self):
-        self.position = 50
 
-    def increase(self, num):
-        self.position = self.position + num
-        self._validate()
-    
-    def decrease(self, num):
-        self.position = self.position - num
-        self._validate()
-
-    def _validate(self):
-        while self.position < 0:
-            self.position += 100
-        while self.position > 99:
-            self.position -= 100
 
 def main(input_list):
     lock_position = LockPosition()
-
-    password_count = 0
 
     for change in input_list:
         message = f"{change} : {lock_position.position} ->"
@@ -42,11 +25,8 @@ def main(input_list):
 
         message = f"{message} {lock_position.position}"
         print(message)
-
-        if (lock_position.position == 0):
-            password_count += 1
     
-    print(f"Password is {password_count}")
+    print(f"Password is {lock_position.password_count}")
 
 
 # ------------------------------------------------------------------------------------------
